@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Camera2D.cpp" />
+    <ClCompile Include="Core.cpp" />
+    <ClCompile Include="ImageDatabase.cpp" />
+    <ClCompile Include="micropather.cpp" />
+    <ClCompile Include="template.cpp" />
+    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Entity.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Camera2D.h" />
+    <ClInclude Include="ImageDatabase.h" />
+    <ClInclude Include="micropather.h" />
+    <ClInclude Include="template.h" />
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{ddda73f1-1aaa-4e30-b1e8-e6fb7df12a61}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
