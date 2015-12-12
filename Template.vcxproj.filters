@@ -10,6 +10,7 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="CombatGrid.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera2D.h" />
@@ -20,6 +21,7 @@
     <ClInclude Include="Entity.h">
       <Filter>Entities</Filter>
     </ClInclude>
+    <ClInclude Include="CombatGrid.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Entities">

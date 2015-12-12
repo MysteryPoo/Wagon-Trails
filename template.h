@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <memory>
 #include "Camera2D.h"
+#include "CombatGrid.h"
 
 #define DEVICE_WIDTH 1024
 #define DEVICE_HEIGHT 768
@@ -23,6 +24,7 @@ class app
 	int GUID;
 	float lastFrame;
 	Camera2D *camera;
+	CombatGrid * grid;
 	//std::unordered_map<int, int> temp;
 	public:
 
@@ -37,6 +39,7 @@ class app
 		ImageDatabase* getImageDatabase() { return id; }
 		Camera2D* getCamera() { return camera; }
 		void NewEntity();
+		CombatGrid * getCombatGrid() { return grid; };
 };
 
 extern app App;
