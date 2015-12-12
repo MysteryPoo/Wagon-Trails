@@ -6,8 +6,7 @@ class Camera2D
 {
 	Transform *follow;
 public:
-	Camera2D();
-	Camera2D(Transform *follow);
+	Camera2D(Transform * follow = nullptr);
 	~Camera2D();
 	void Assign(Transform *follow) { this->follow = follow; };
 	void Unassign() { follow = nullptr; }

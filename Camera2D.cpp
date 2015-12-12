@@ -1,15 +1,9 @@
 #include "Camera2D.h"
 #include "agk.h"
 
-Camera2D::Camera2D()
-{
-	follow = nullptr;
-}
-
 Camera2D::Camera2D(Transform * follow)
 {
-	Camera2D();
-	Assign(follow);
+	follow = nullptr;
 }
 
 Camera2D::~Camera2D()
