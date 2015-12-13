@@ -14,20 +14,12 @@ Entity::Entity(app * App)
 	agk::SetSpriteAnimation(m_SpriteIndex, 64, 64, 64);
 	agk::PlaySprite(m_SpriteIndex, 5);
 	agk::SetSpriteOffset(m_SpriteIndex, agk::GetSpriteWidth(m_SpriteIndex) * 0.5f, agk::GetSpriteHeight(m_SpriteIndex) * 0.5f);
-	//float x = (float)agk::Random(0, agk::GetVirtualWidth());
-	//float y = (float)agk::Random(0, agk::GetVirtualHeight());
-	//float direction = (float)agk::Random(0, 360);
-	//float speed = (float)agk::Random(10, 50);
 	m_Transform = new Transform(0.0f, 0.0f);
-	//m_Path = new MPVector<void*>();
-	//Move(0, 0);
-	//agk::SetSpritePositionByOffset(m_SpriteIndex, x, y);
 }
 
 Entity::~Entity()
 {
 	delete m_Transform;
-	//delete m_Path;
 	agk::DeleteSprite(m_SpriteIndex);
 }
 

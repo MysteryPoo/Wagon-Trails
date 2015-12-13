@@ -23,11 +23,7 @@ void app::Begin(void)
 	{
 		NewEntity();
 	}
-
-	//camera = new Camera2D();
 	camera = new Camera2D(entities->begin()->second->GetTransform());
-
-	//entities->begin()->second->Move(agk::Random(0, 30 * 64), agk::Random(0, 30 * 64));
 	
 	grid = new CombatGrid(this);
 }

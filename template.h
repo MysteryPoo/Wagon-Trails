@@ -25,7 +25,6 @@ class app
 	float lastFrame;
 	Camera2D *camera;
 	CombatGrid * grid;
-	//std::unordered_map<int, int> temp;
 	public:
 
 		// constructor

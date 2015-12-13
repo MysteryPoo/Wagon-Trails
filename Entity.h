@@ -21,5 +21,6 @@ public:
 	~Entity();
 	void Update(float delta);
 	Transform* GetTransform() { return m_Transform; };
+	// Grid position to attempt to move to. Will use path finding appropriately.
 	void Move(int x, int y);
 };
