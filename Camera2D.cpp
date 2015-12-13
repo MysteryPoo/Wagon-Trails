@@ -3,7 +3,7 @@
 
 Camera2D::Camera2D(Transform * follow)
 {
-	follow = nullptr;
+	this->follow = follow;
 }
 
 Camera2D::~Camera2D()
