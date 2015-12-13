@@ -54,9 +54,6 @@ void app::Loop (void)
 
 
 	agk::Print( agk::ScreenFPS() );
-	agk::Print(entities->begin()->second->GetTransform()->getSpriteX()/64);
-	agk::Print(entities->begin()->second->GetTransform()->getSpriteY()/64);
-	agk::Print(entities->begin()->second->GetTransform()->getSpeed());
 	agk::Sync();
 }
 
