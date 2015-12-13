@@ -21,7 +21,15 @@ CombatGrid::CombatGrid(app * App, int Width, int Height)
 			if (rand > 70 && x != 0 && y != 0)
 			{
 				m_Grid[y*Width + x] = CombatGrid::OBSTACLE;
-				int Sprite = agk::CreateSprite(id->getImage("Media\\TerrainTiles2.png"));
+				int Sprite = agk::CreateSprite(id->getImage("Media\\TerrainTiles.png"));
+				agk::SetSpriteSnap(Sprite, 1);
+				agk::SetSpriteAnimation(Sprite, 64, 64, 64);
+				agk::SetSpriteFrame(Sprite, agk::Random(0, 100) > 50 ? 1 : 2);
+				agk::SetSpriteOffset(Sprite, agk::GetSpriteWidth(Sprite) * 0.5f, agk::GetSpriteHeight(Sprite) * 0.5f);
+				agk::SetSpritePositionByOffset(Sprite, (float)x * 64, (float)y * 64);
+				agk::SetSpriteDepth(Sprite, 51);
+				m_Sprites->push_back(Sprite);
+				Sprite = agk::CreateSprite(id->getImage("Media\\TerrainTiles2.png"));
 				agk::SetSpriteSnap(Sprite, 1);
 				agk::SetSpriteAnimation(Sprite, 64, 64, 64);
 				agk::SetSpriteFrame(Sprite, agk::Random(0, 100) > 50 ? 32 : 40);
@@ -39,7 +47,7 @@ CombatGrid::CombatGrid(app * App, int Width, int Height)
 				agk::SetSpriteFrame(Sprite, agk::Random(0, 100) > 50 ? 1 : 2);
 				agk::SetSpriteOffset(Sprite, agk::GetSpriteWidth(Sprite) * 0.5f, agk::GetSpriteHeight(Sprite) * 0.5f);
 				agk::SetSpritePositionByOffset(Sprite, (float)x * 64, (float)y * 64);
-				agk::SetSpriteDepth(Sprite, 50);
+				agk::SetSpriteDepth(Sprite, 51);
 				m_Sprites->push_back(Sprite);
 			}
 		}
