@@ -15,10 +15,10 @@ class CombatGrid : public Graph
 	char* m_Grid;
 	enum Tile
 	{
-		OPEN,
-		OBSTACLE,
-		ELEVATED,
-		CHOKE
+		OPEN = 0,
+		OBSTACLE = 1,
+		ELEVATED = 2,
+		CHOKE = 4
 	};
 	struct Point
 	{
@@ -28,6 +28,8 @@ class CombatGrid : public Graph
 public:
 	CombatGrid(class app * App, int Width = 20, int Height = 20);
 	~CombatGrid();
+	int GetWidth() { return m_Width; };
+	int GetHeight() { return m_Height; };
 	Point * NodeToXY(void * node);
 	void NodeToXY(void * node, int * x, int * y);
 	void * XYToNode(int x, int y);

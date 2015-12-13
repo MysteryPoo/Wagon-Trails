@@ -11,6 +11,7 @@
       <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="CombatGrid.cpp" />
+    <ClCompile Include="Archer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera2D.h" />
@@ -22,6 +23,9 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="CombatGrid.h" />
+    <ClInclude Include="Archer.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Entities">

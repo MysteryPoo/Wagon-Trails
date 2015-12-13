@@ -1,5 +1,6 @@
 // Includes
 #include "template.h"
+#include "Archer.h"
 
 // Namespace
 using namespace AGK;
@@ -15,17 +16,16 @@ void app::Begin(void)
 	agk::SetScissor(0, 0, 0, 0);
 
 	id = new ImageDatabase();
+	grid = new CombatGrid(this);
 	entities = new std::unordered_map<int, std::unique_ptr<Entity>>();
 	GUID = 1;
 	lastFrame = agk::Timer();
 
-	for (int s = 0; s < 1; ++s)
+	for (int s = 0; s < 20; ++s)
 	{
 		NewEntity();
 	}
 	camera = new Camera2D(entities->begin()->second->GetTransform());
-	
-	grid = new CombatGrid(this);
 }
 
 void app::Loop (void)
@@ -35,7 +35,7 @@ void app::Loop (void)
 	lastFrame = thisFrame;
 	for (auto s = entities->begin(); s != entities->end(); ++s)
 	{
-		s->second->Update(diff);
+		s->second->Update(thisFrame, diff);
 	}
 	camera->Update();
 
@@ -65,5 +65,23 @@ void app::End (void)
 
 void app::NewEntity()
 {
-	entities->insert(std::make_pair<int, std::unique_ptr<Entity>>(GUID++, std::unique_ptr<Entity>(new Entity(this))));
+	int x, y;
+	do
+	{
+		x = agk::Random(0, grid->GetWidth() - 1);
+		y = agk::Random(0, grid->GetHeight() - 1);
+	} while (!grid->Passable(x, y));
+	entities->insert(std::make_pair<int, std::unique_ptr<Entity>>(GUID++, std::unique_ptr<Entity>(new Archer(this, x, y))));
+}
+
+bool app::EntityAt(int x, int y)
+{
+	for (auto s = entities->begin(); s != entities->end(); ++s)
+	{
+		if (s->second->GetTransform()->getX() == x && s->second->GetTransform()->getY() == y)
+		{
+			return true;
+		}
+	}
+	return false;
 }

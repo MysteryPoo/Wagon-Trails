@@ -39,6 +39,7 @@ class app
 		Camera2D* getCamera() { return camera; }
 		void NewEntity();
 		CombatGrid * getCombatGrid() { return grid; };
+		bool EntityAt(int x, int y);
 };
 
 extern app App;
