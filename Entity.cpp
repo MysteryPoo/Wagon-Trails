@@ -35,20 +35,24 @@ void Entity::Update(float delta)
 {
 	if (m_NodeIndex < m_Path.size() && m_Transform->getSpeed() == 0.0f)
 	{
-		int x, y, nx, ny;
+		int x, y;
 		m_AppRef->getCombatGrid()->NodeToXY(m_Path[m_NodeIndex++], &x, &y);
 		m_Transform->Move(x, y);
 	}
 	
-	for (int n = 0; n < m_Path.size(); ++n)
+	for (unsigned n = 0; n < m_Path.size(); ++n)
 	{
 		int x, y;
 		m_AppRef->getCombatGrid()->NodeToXY(m_Path[n], &x, &y);
 		float drawX, drawY;
-		drawX = agk::WorldToScreenX(x * 64);
-		drawY = agk::WorldToScreenY(y * 64);
-		agk::DrawEllipse(drawX, drawY, 32, 32, agk::MakeColor(255, 50, 50), agk::MakeColor(255, 50, 50), 1);
-		agk::Print(m_Path.size());
+		drawX = agk::WorldToScreenX(x * 64.0f);
+		drawY = agk::WorldToScreenY(y * 64.0f);
+		int red = agk::MakeColor(255, 50, 50);
+		int green = agk::MakeColor(50, 255, 50);
+		if (n >= m_NodeIndex)
+			agk::DrawEllipse(drawX, drawY, 32, 32, red, red, 0);
+		else
+			agk::DrawEllipse(drawX, drawY, 32, 32, green, green, 0);
 	}
 
 	m_Transform->Update(delta);
