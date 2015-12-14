@@ -17,6 +17,7 @@ Entity::Entity(app * App, int x, int y)
 	agk::SetSpriteOffset(m_SpriteIndex, agk::GetSpriteWidth(m_SpriteIndex) * 0.5f, agk::GetSpriteHeight(m_SpriteIndex) * 0.5f);
 	m_Transform = new Transform((float)x * 64.0f, (float)y * 64.0f);
 	m_NextThought = 0.0f;
+	m_Health = m_HealthMax = 10;
 }
 
 Entity::~Entity()
@@ -37,7 +38,10 @@ void Entity::Update(float timer, float delta)
 			m_Transform->Move(x, y);
 		}
 		else
-			--m_NodeIndex;
+		{
+			m_AppRef->getCombatGrid()->NodeToXY(m_Path[m_Path.size() - 1], &x, &y);
+			Move(x, y);
+		}
 	}
 	// Move the transform
 	m_Transform->Update(delta);
@@ -70,10 +74,13 @@ void Entity::Move(int x, int y)
 {
 	if (m_AppRef->getCombatGrid()->Passable(x, y))
 	{
+		// Issue: This destroys the pathing cache, however, the cache becomes
+		// corrupted because entities move and they cause collisions.
+		m_AppRef->getCombatGrid()->GetPather()->Reset();
 		float totalCost;
 		void * start = m_AppRef->getCombatGrid()->XYToNode(m_Transform->getX(), m_Transform->getY());
 		void * end = m_AppRef->getCombatGrid()->XYToNode(x, y);
-		int result = m_AppRef->getCombatGrid()->Pather()->Solve(start, end, &m_Path, &totalCost);
+		int result = m_AppRef->getCombatGrid()->GetPather()->Solve(start, end, &m_Path, &totalCost);
 		m_NodeIndex = 1;
 	}
 }

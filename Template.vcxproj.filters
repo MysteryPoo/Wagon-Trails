@@ -11,7 +11,10 @@
       <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="CombatGrid.cpp" />
-    <ClCompile Include="Archer.cpp" />
+    <ClCompile Include="Archer.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Arrow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera2D.h" />
@@ -24,6 +27,9 @@
     </ClInclude>
     <ClInclude Include="CombatGrid.h" />
     <ClInclude Include="Archer.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Arrow.h">
       <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>

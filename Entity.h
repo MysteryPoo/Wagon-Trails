@@ -17,6 +17,8 @@ class Entity {
 	unsigned m_NodeIndex;
 	void ClearPath();
 	float m_NextThought;
+	int m_HealthMax;
+	int m_Health;
 public:
 	Entity(class app * App, int x = 0, int y = 0);
 	~Entity();
@@ -27,4 +29,5 @@ public:
 	virtual void Think() {};
 	virtual void Attack() {};
 	app * GetAppRef() { return m_AppRef; };
+	float GetHealth() { return (float)m_Health / (float)m_HealthMax; };
 };

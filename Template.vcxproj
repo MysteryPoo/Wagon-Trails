@@ -112,6 +112,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Archer.cpp" />
+    <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="CombatGrid.cpp" />
     <ClCompile Include="Core.cpp" />
@@ -123,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archer.h" />
+    <ClInclude Include="Arrow.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="CombatGrid.h" />
     <ClInclude Include="Entity.h" />

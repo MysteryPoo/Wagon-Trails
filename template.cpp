@@ -21,11 +21,12 @@ void app::Begin(void)
 	GUID = 1;
 	lastFrame = agk::Timer();
 
-	for (int s = 0; s < 20; ++s)
+	for (int s = 0; s < 2; ++s)
 	{
 		NewEntity();
 	}
 	camera = new Camera2D(entities->begin()->second->GetTransform());
+	arrow = new Arrow(this, lastFrame, 3, 3);
 }
 
 void app::Loop (void)
@@ -38,6 +39,8 @@ void app::Loop (void)
 		s->second->Update(thisFrame, diff);
 	}
 	camera->Update();
+	if (arrow != nullptr)
+		arrow->Update(thisFrame, diff);
 
 	float mouseX = agk::GetPointerX();
 	float mouseY = agk::GetPointerY();
@@ -61,6 +64,7 @@ void app::End (void)
 	entities->clear();
 	delete entities;
 	delete grid;
+	delete arrow;
 }
 
 void app::NewEntity()
@@ -84,4 +88,10 @@ bool app::EntityAt(int x, int y)
 		}
 	}
 	return false;
+}
+
+void app::DestroyArrow()
+{
+	delete arrow;
+	arrow = nullptr;
 }

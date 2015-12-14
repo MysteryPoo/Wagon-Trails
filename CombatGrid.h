@@ -37,5 +37,5 @@ public:
 	virtual float LeastCostEstimate(void* nodeStart, void* nodeEnd);
 	virtual void AdjacentCost(void* node, micropather::MPVector<StateCost> *neighbors);
 	virtual void PrintStateInfo(void * state);
-	MicroPather * Pather() { return m_Pather; };
+	MicroPather * GetPather() { return m_Pather; };
 };

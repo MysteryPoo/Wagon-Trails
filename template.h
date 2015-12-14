@@ -9,6 +9,7 @@
 #include <memory>
 #include "Camera2D.h"
 #include "CombatGrid.h"
+#include "Arrow.h"
 
 #define DEVICE_WIDTH 1024
 #define DEVICE_HEIGHT 768
@@ -25,6 +26,7 @@ class app
 	float lastFrame;
 	Camera2D *camera;
 	CombatGrid * grid;
+	Arrow * arrow;
 	public:
 
 		// constructor
@@ -40,6 +42,7 @@ class app
 		void NewEntity();
 		CombatGrid * getCombatGrid() { return grid; };
 		bool EntityAt(int x, int y);
+		void DestroyArrow();
 };
 
 extern app App;

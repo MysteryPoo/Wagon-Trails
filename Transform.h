@@ -19,5 +19,5 @@ public:
 	float getSpriteY() { return m_SpriteY; }
 	int getX() { return m_GoalX; };
 	int getY() { return m_GoalY; };
-	void Update(float time);
+	void Update(float delta);
 };
