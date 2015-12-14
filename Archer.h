@@ -1,11 +1,10 @@
 #pragma once
 
-#include "Entity.h"
+#include "Character.h"
 
-class Archer : public Entity
+class Archer : public Character
 {
 public:
-	Archer(class app * App);
 	Archer(class app * App, int x, int y);
 	void Think();
 };

@@ -14,7 +14,12 @@
     <ClCompile Include="Archer.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Arrow.cpp" />
+    <ClCompile Include="Arrow.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera2D.h" />
@@ -30,6 +35,9 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="Arrow.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
       <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
