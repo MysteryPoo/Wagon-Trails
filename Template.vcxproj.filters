@@ -20,6 +20,7 @@
     <ClCompile Include="Character.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="EntityManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera2D.h" />
@@ -38,6 +39,9 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
       <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>

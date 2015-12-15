@@ -118,6 +118,7 @@
     <ClCompile Include="CombatGrid.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="ImageDatabase.cpp" />
     <ClCompile Include="micropather.cpp" />
     <ClCompile Include="template.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="CombatGrid.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="EntityManager.h" />
     <ClInclude Include="ImageDatabase.h" />
     <ClInclude Include="micropather.h" />
     <ClInclude Include="template.h" />

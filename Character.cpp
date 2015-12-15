@@ -2,12 +2,11 @@
 #include "ImageDatabase.h"
 #include "template.h"
 
-Character::Character(class app * App, int x, int y) : Entity(App, x, y)
+Character::Character(class app * App, unsigned entityIndex, int x, int y) : Entity(App, entityIndex, x, y)
 {
 	ImageDatabase *id = m_AppRef->getImageDatabase();
 	m_SpriteIndex = agk::CreateSprite(id->getImage("Media\\Humanoids1.png"));
 	agk::SetSpriteAnimation(m_SpriteIndex, 64, 64, 64);
-	agk::SetSpriteFrame(m_SpriteIndex, agk::Random(1, 64));
 	agk::SetSpriteOffset(m_SpriteIndex, agk::GetSpriteWidth(m_SpriteIndex) * 0.5f, agk::GetSpriteHeight(m_SpriteIndex) * 0.5f);
 	m_Transform = new Transform((float)x * 64.0f, (float)y * 64.0f);
 	m_NextThought = 0.0f;

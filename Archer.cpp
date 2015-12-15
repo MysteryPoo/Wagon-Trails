@@ -2,9 +2,10 @@
 #include "template.h"
 #include "agk.h"
 
-Archer::Archer(app * App, int x, int y) : Character(App, x, y)
+Archer::Archer(app * App, unsigned entityIndex, int x, int y) : Character(App, entityIndex, x, y)
 {
 	// No special instructions for the Archer ctr. Simply calls Character ctr.
+	agk::SetSpriteFrame(m_SpriteIndex, 1);
 }
 
 void Archer::Think()

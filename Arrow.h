@@ -2,15 +2,15 @@
 
 #include "agk.h"
 #include "Transform.h"
+#include "Entity.h"
 
-class Arrow
+class Arrow : public Entity
 {
-	class app * m_AppRef;
-	int m_Sprite;
+	class app * m_App;
 	float m_TimeToDie;
-	Transform * m_Transform;
 public:
-	Arrow(class app * App, float time, int x, int y);
+	Arrow(class app * App, unsigned entityIndex, float time, int x = 0, int y = 0);
 	~Arrow();
 	void Update(float time, float delta);
+	void Move(int x, int y);
 };

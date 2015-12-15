@@ -1,9 +1,11 @@
 #include "Entity.h"
 #include "template.h"
 
-Entity::Entity(app * App, int x, int y)
+Entity::Entity(app * App, unsigned entityIndex, int x, int y)
 {
 	m_AppRef = App;
+	m_EntityIndex = entityIndex;
+	m_TimeToDie = false;
 }
 
 Entity::~Entity()

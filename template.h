@@ -4,12 +4,9 @@
 // Link to GDK libraries
 #include "agk.h"
 #include "ImageDatabase.h"
-#include "Entity.h"
-#include <unordered_map>
-#include <memory>
 #include "Camera2D.h"
 #include "CombatGrid.h"
-#include "Arrow.h"
+#include "EntityManager.h"
 
 #define DEVICE_WIDTH 1024
 #define DEVICE_HEIGHT 768
@@ -21,12 +18,10 @@
 class app
 {
 	ImageDatabase *id;
-	std::unordered_map<int, std::unique_ptr<Entity>> *entities;
-	int GUID;
 	float lastFrame;
 	Camera2D *camera;
 	CombatGrid * grid;
-	Arrow * arrow;
+	EntityManager * m_EntityManager;
 	public:
 
 		// constructor
@@ -39,10 +34,8 @@ class app
 
 		ImageDatabase* getImageDatabase() { return id; }
 		Camera2D* getCamera() { return camera; }
-		void NewEntity();
 		CombatGrid * getCombatGrid() { return grid; };
-		bool EntityAt(int x, int y);
-		void DestroyArrow();
+		EntityManager * GetEntityManager() { return m_EntityManager; };
 };
 
 extern app App;

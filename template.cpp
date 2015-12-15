@@ -17,16 +17,15 @@ void app::Begin(void)
 
 	id = new ImageDatabase();
 	grid = new CombatGrid(this);
-	entities = new std::unordered_map<int, std::unique_ptr<Entity>>();
-	GUID = 1;
+	m_EntityManager = new EntityManager(this);
 	lastFrame = agk::Timer();
 
 	for (int s = 0; s < 2; ++s)
 	{
-		NewEntity();
+		m_EntityManager->NewArcher();
+		m_EntityManager->NewArrow(5, 5);
 	}
-	camera = new Camera2D(entities->begin()->second->GetTransform());
-	arrow = new Arrow(this, lastFrame, 3, 3);
+	camera = new Camera2D(this, 0);
 }
 
 void app::Loop (void)
@@ -34,13 +33,8 @@ void app::Loop (void)
 	float thisFrame = agk::Timer();
 	float diff = thisFrame - lastFrame;
 	lastFrame = thisFrame;
-	for (auto s = entities->begin(); s != entities->end(); ++s)
-	{
-		s->second->Update(thisFrame, diff);
-	}
+	m_EntityManager->Update(thisFrame, diff);
 	camera->Update();
-	if (arrow != nullptr)
-		arrow->Update(thisFrame, diff);
 
 	float mouseX = agk::GetPointerX();
 	float mouseY = agk::GetPointerY();
@@ -48,8 +42,8 @@ void app::Loop (void)
 	mouseY = agk::ScreenToWorldY(mouseY);
 	int newX = (int)((mouseX + 32) / 64);
 	int newY = (int)((mouseY + 32) / 64);
-	if(newX >= 0 && newY >= 0 && agk::GetPointerPressed())
-		entities->begin()->second->Move(newX, newY);
+	if (newX >= 0 && newY >= 0 && agk::GetPointerPressed())
+		m_EntityManager->GetEntity(0)->Move(newX, newY);
 
 
 	agk::Print( agk::ScreenFPS() );
@@ -61,37 +55,5 @@ void app::End (void)
 {
 	delete id;
 	delete camera;
-	entities->clear();
-	delete entities;
 	delete grid;
-	delete arrow;
-}
-
-void app::NewEntity()
-{
-	int x, y;
-	do
-	{
-		x = agk::Random(0, grid->GetWidth() - 1);
-		y = agk::Random(0, grid->GetHeight() - 1);
-	} while (!grid->Passable(x, y));
-	entities->insert(std::make_pair<int, std::unique_ptr<Entity>>(GUID++, std::unique_ptr<Entity>(new Archer(this, x, y))));
-}
-
-bool app::EntityAt(int x, int y)
-{
-	for (auto s = entities->begin(); s != entities->end(); ++s)
-	{
-		if (s->second->GetTransform()->getX() == x && s->second->GetTransform()->getY() == y)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-void app::DestroyArrow()
-{
-	delete arrow;
-	arrow = nullptr;
 }

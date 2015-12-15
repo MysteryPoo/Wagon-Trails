@@ -88,7 +88,7 @@ void * CombatGrid::XYToNode(int x, int y)
 
 bool CombatGrid::Passable(int x, int y)
 {
-	if (m_Grid[y*m_Width + x] == CombatGrid::OBSTACLE || m_AppRef->EntityAt(x, y))
+	if (m_Grid[y*m_Width + x] == CombatGrid::OBSTACLE || m_AppRef->GetEntityManager()->EntityAt(x, y))
 		return false;
 	else
 		return true;

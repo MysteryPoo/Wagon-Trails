@@ -1,15 +1,13 @@
 #pragma once
 
-#include "Transform.h"
-
 class Camera2D
 {
-	Transform *follow;
+	class app * m_App;
+	unsigned m_Index;
 public:
-	Camera2D(Transform * follow = nullptr);
+	Camera2D(class app * App, unsigned index);
 	~Camera2D();
-	void Assign(Transform *follow) { this->follow = follow; };
-	void Unassign() { follow = nullptr; }
-	Transform* getAssigned() { return follow; }
+	void Assign(unsigned index) { this->m_Index = index; };
+	unsigned GetAssigned() { return m_Index; }
 	void Update();
 };

@@ -5,6 +5,6 @@
 class Archer : public Character
 {
 public:
-	Archer(class app * App, int x, int y);
+	Archer(class app * App, unsigned entityIndex, int x, int y);
 	void Think();
 };
