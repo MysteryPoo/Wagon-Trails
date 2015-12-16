@@ -19,5 +19,7 @@ public:
 	Entity * GetEntity(unsigned index);
 	void NewArcher(int x = 0, int y = 0);
 	void NewArrow(int x, int y, unsigned targetIndex);
+	void NewEntity(Entity * entity);
+	void NewHitEffect(int x, int y);
 	void Update(float time, float delta);
 };

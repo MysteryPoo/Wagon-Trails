@@ -20,7 +20,12 @@
     <ClCompile Include="Character.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="EntityManager.cpp" />
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera2D.h" />
@@ -28,26 +33,32 @@
     <ClInclude Include="micropather.h" />
     <ClInclude Include="template.h" />
     <ClInclude Include="Transform.h" />
-    <ClInclude Include="Entity.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="CombatGrid.h" />
     <ClInclude Include="Archer.h">
-      <Filter>Entities</Filter>
+      <Filter>Entities\Header</Filter>
     </ClInclude>
     <ClInclude Include="Arrow.h">
-      <Filter>Entities</Filter>
+      <Filter>Entities\Header</Filter>
     </ClInclude>
     <ClInclude Include="Character.h">
-      <Filter>Entities</Filter>
+      <Filter>Entities\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Entities\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Entities\Header</Filter>
     </ClInclude>
     <ClInclude Include="EntityManager.h">
-      <Filter>Entities</Filter>
+      <Filter>Entities\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Entities">
       <UniqueIdentifier>{ddda73f1-1aaa-4e30-b1e8-e6fb7df12a61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Header">
+      <UniqueIdentifier>{b9d9401e-dfbd-4f36-852f-e33437c8d0cb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -15,8 +15,7 @@ Arrow::Arrow(app * App, unsigned entityIndex, float time, unsigned targetIndex, 
 
 Arrow::~Arrow()
 {
-	delete m_Transform;
-	agk::DeleteSprite(m_SpriteIndex);
+	m_App->GetEntityManager()->NewHitEffect(m_Transform->getX(), m_Transform->getY());
 }
 
 void Arrow::Update(float time, float delta)
@@ -35,7 +34,7 @@ void Arrow::Update(float time, float delta)
 		m_Hit = true;
 	}
 	if (time > m_TimeToDie)
-		m_App->GetEntityManager()->GetEntity(m_EntityIndex)->TimeToDie(true);
+		Entity::TimeToDie(true);
 }
 
 void Arrow::Move(int x, int y)

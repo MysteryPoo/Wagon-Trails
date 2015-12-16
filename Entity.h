@@ -14,7 +14,7 @@ protected:
 	bool m_TimeToDie;
 public:
 	Entity(class app * App, unsigned entityIndex, int x = 0, int y = 0);
-	~Entity();
+	virtual ~Entity();
 	app * GetAppRef() { return m_App; };
 	Transform* GetTransform() { return m_Transform; };
 	int GetSprite() { return m_SpriteIndex; };

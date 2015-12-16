@@ -3,6 +3,7 @@
 #include "template.h"
 #include "Archer.h"
 #include "Arrow.h"
+#include "Effect.h"
 
 EntityManager::EntityManager(app * App)
 {
@@ -68,6 +69,20 @@ void EntityManager::NewArrow(int x, int y, unsigned targetIndex)
 	while (GetEntity(m_EntityIndex) != nullptr)
 		++m_EntityIndex;
 	m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Arrow(m_App, m_EntityIndex, agk::Timer(), targetIndex, x, y)));
+}
+
+void EntityManager::NewEntity(Entity * entity)
+{
+	while (GetEntity(m_EntityIndex) != nullptr)
+		++m_EntityIndex;
+	m_Entities->insert(std::make_pair(m_EntityIndex++, entity));
+}
+
+void EntityManager::NewHitEffect(int x, int y)
+{
+	while (GetEntity(m_EntityIndex) != nullptr)
+		++m_EntityIndex;
+	m_Entities->insert(std::make_pair(m_EntityIndex++, new Effect(m_App, m_EntityIndex, agk::Timer(), x, y)));
 }
 
 void EntityManager::Update(float time, float delta)
