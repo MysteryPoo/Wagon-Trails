@@ -28,6 +28,9 @@ void Archer::Think()
 		newY = newY < 0 ? 0 : newY;
 		newY = newY > width ? width : newY;
 		Character::Move(newX, newY);
+		m_App->GetEntityManager()->NewArrow(m_Transform->getX(),
+			m_Transform->getY(),
+			m_EntityIndex == 0 ? 1 : 0);
 	}
 	
 }

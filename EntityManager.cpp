@@ -63,11 +63,11 @@ void EntityManager::NewArcher(int x, int y)
 	m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Archer(m_App, m_EntityIndex, x, y)));
 }
 
-void EntityManager::NewArrow(int x, int y)
+void EntityManager::NewArrow(int x, int y, unsigned targetIndex)
 {
 	while (GetEntity(m_EntityIndex) != nullptr)
 		++m_EntityIndex;
-	m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Arrow(m_App, m_EntityIndex, x, y)));
+	m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Arrow(m_App, m_EntityIndex, agk::Timer(), targetIndex, x, y)));
 }
 
 void EntityManager::Update(float time, float delta)

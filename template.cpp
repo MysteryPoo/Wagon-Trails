@@ -20,10 +20,9 @@ void app::Begin(void)
 	m_EntityManager = new EntityManager(this);
 	lastFrame = agk::Timer();
 
-	for (int s = 0; s < 2; ++s)
+	for (int s = 0; s < 12; ++s)
 	{
 		m_EntityManager->NewArcher();
-		m_EntityManager->NewArrow(5, 5);
 	}
 	camera = new Camera2D(this, 0);
 }
@@ -43,8 +42,12 @@ void app::Loop (void)
 	int newX = (int)((mouseX + 32) / 64);
 	int newY = (int)((mouseY + 32) / 64);
 	if (newX >= 0 && newY >= 0 && agk::GetPointerPressed())
+	{
 		m_EntityManager->GetEntity(0)->Move(newX, newY);
-
+		m_EntityManager->NewArrow(m_EntityManager->GetEntity(0)->GetTransform()->getX(),
+			m_EntityManager->GetEntity(0)->GetTransform()->getY(),
+			1);
+	}
 
 	agk::Print( agk::ScreenFPS() );
 	agk::Sync();

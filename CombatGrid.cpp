@@ -4,8 +4,8 @@
 
 CombatGrid::CombatGrid(app * App, int Width, int Height)
 {
-	m_AppRef = App;
-	ImageDatabase * id = m_AppRef->getImageDatabase();
+	m_App = App;
+	ImageDatabase * id = m_App->getImageDatabase();
 	totalCost = 0;
 	m_Width = Width;
 	m_Height = Height;
@@ -88,7 +88,7 @@ void * CombatGrid::XYToNode(int x, int y)
 
 bool CombatGrid::Passable(int x, int y)
 {
-	if (m_Grid[y*m_Width + x] == CombatGrid::OBSTACLE || m_AppRef->GetEntityManager()->EntityAt(x, y))
+	if (m_Grid[y*m_Width + x] == CombatGrid::OBSTACLE || m_App->GetEntityManager()->EntityAt(x, y))
 		return false;
 	else
 		return true;

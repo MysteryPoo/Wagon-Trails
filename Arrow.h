@@ -6,10 +6,11 @@
 
 class Arrow : public Entity
 {
-	class app * m_App;
 	float m_TimeToDie;
+	unsigned m_TargetIndex;
+	bool m_Hit;
 public:
-	Arrow(class app * App, unsigned entityIndex, float time, int x = 0, int y = 0);
+	Arrow(class app * App, unsigned entityIndex, float time, unsigned targetIndex, int x, int y);
 	~Arrow();
 	void Update(float time, float delta);
 	void Move(int x, int y);

@@ -1,12 +1,13 @@
 #include "Transform.h"
 #include <agk.h>
 
-Transform::Transform(float x, float y, SpriteSize spriteSize)
+Transform::Transform(float x, float y, SpriteSize spriteSize, float maxSpeed)
 {
 	this->m_SpriteX = x;
 	this->m_SpriteY = y;
 	this->m_Direction = 0;
 	this->m_Speed = 0;
+	this->m_MaxSpeed = maxSpeed;
 	this->m_GoalX = x / spriteSize.Width;
 	this->m_GoalY = y / spriteSize.Height;
 	this->m_SpriteSize.Width = spriteSize.Width;
@@ -26,7 +27,7 @@ void Transform::setDirection(float direction)
 
 void Transform::setSpeed(float speed)
 {
-	this->m_Speed = speed;
+	this->m_MaxSpeed = speed;
 }
 
 void Transform::Update(float time)
@@ -43,7 +44,7 @@ void Transform::Update(float time)
 	else
 	{
 		m_Direction = agk::ATan2(dy, dx);
-		m_Speed = 200.0f;
+		m_Speed = m_MaxSpeed;
 		m_SpriteX += m_Speed * time * agk::Cos(m_Direction);
 		m_SpriteY += m_Speed * time * agk::Sin(m_Direction);
 	}

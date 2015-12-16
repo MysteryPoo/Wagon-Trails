@@ -4,7 +4,7 @@
 
 Character::Character(class app * App, unsigned entityIndex, int x, int y) : Entity(App, entityIndex, x, y)
 {
-	ImageDatabase *id = m_AppRef->getImageDatabase();
+	ImageDatabase *id = m_App->getImageDatabase();
 	m_SpriteIndex = agk::CreateSprite(id->getImage("Media\\Humanoids1.png"));
 	agk::SetSpriteAnimation(m_SpriteIndex, 64, 64, 64);
 	agk::SetSpriteOffset(m_SpriteIndex, agk::GetSpriteWidth(m_SpriteIndex) * 0.5f, agk::GetSpriteHeight(m_SpriteIndex) * 0.5f);
@@ -20,14 +20,14 @@ void Character::Update(float time, float delta)
 	if (m_NodeIndex < m_Path.size() && m_Transform->getSpeed() == 0.0f)
 	{
 		int x, y;
-		m_AppRef->getCombatGrid()->NodeToXY(m_Path[m_NodeIndex++], &x, &y);
-		if (m_AppRef->getCombatGrid()->Passable(x, y))
+		m_App->getCombatGrid()->NodeToXY(m_Path[m_NodeIndex++], &x, &y);
+		if (m_App->getCombatGrid()->Passable(x, y))
 		{
 			m_Transform->Move(x, y);
 		}
 		else
 		{
-			m_AppRef->getCombatGrid()->NodeToXY(m_Path[m_Path.size() - 1], &x, &y);
+			m_App->getCombatGrid()->NodeToXY(m_Path[m_Path.size() - 1], &x, &y);
 			Move(x, y);
 		}
 	}
@@ -35,7 +35,7 @@ void Character::Update(float time, float delta)
 	for (unsigned n = 0; n < m_Path.size(); ++n)
 	{
 		int x, y;
-		m_AppRef->getCombatGrid()->NodeToXY(m_Path[n], &x, &y);
+		m_App->getCombatGrid()->NodeToXY(m_Path[n], &x, &y);
 		float drawX, drawY;
 		drawX = agk::WorldToScreenX(x * 64.0f);
 		drawY = agk::WorldToScreenY(y * 64.0f);
@@ -56,15 +56,15 @@ void Character::Update(float time, float delta)
 
 void Character::Move(int x, int y)
 {
-	if (m_AppRef->getCombatGrid()->Passable(x, y))
+	if (m_App->getCombatGrid()->Passable(x, y))
 	{
 		// Issue: This destroys the pathing cache, however, the cache becomes
 		// corrupted because entities move and they cause collisions.
-		m_AppRef->getCombatGrid()->GetPather()->Reset();
+		m_App->getCombatGrid()->GetPather()->Reset();
 		float totalCost;
-		void * start = m_AppRef->getCombatGrid()->XYToNode(m_Transform->getX(), m_Transform->getY());
-		void * end = m_AppRef->getCombatGrid()->XYToNode(x, y);
-		int result = m_AppRef->getCombatGrid()->GetPather()->Solve(start, end, &m_Path, &totalCost);
+		void * start = m_App->getCombatGrid()->XYToNode(m_Transform->getX(), m_Transform->getY());
+		void * end = m_App->getCombatGrid()->XYToNode(x, y);
+		int result = m_App->getCombatGrid()->GetPather()->Solve(start, end, &m_Path, &totalCost);
 		m_NodeIndex = 1;
 	}
 }

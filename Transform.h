@@ -2,7 +2,7 @@
 
 class Transform
 {
-	float m_SpriteX, m_SpriteY, m_Direction, m_Speed;
+	float m_SpriteX, m_SpriteY, m_Direction, m_Speed, m_MaxSpeed;
 	int m_GoalX, m_GoalY;
 	struct SpriteSize
 	{
@@ -11,7 +11,7 @@ class Transform
 	void setDirection(float direction);
 	void setSpeed(float speed);
 public:
-	Transform(float x = 0.0f, float y = 0.0f, SpriteSize spriteSize = { 64,64 });
+	Transform(float x = 0.0f, float y = 0.0f, SpriteSize spriteSize = { 64,64 }, float maxSpeed = 200.0f);
 	void Move(int x, int y);
 	float getDirection() { return m_Direction; }
 	float getSpeed() { return m_Speed; }

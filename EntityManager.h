@@ -18,6 +18,6 @@ public:
 	void RemoveEntity(unsigned index);
 	Entity * GetEntity(unsigned index);
 	void NewArcher(int x = 0, int y = 0);
-	void NewArrow(int x, int y);
+	void NewArrow(int x, int y, unsigned targetIndex);
 	void Update(float time, float delta);
 };

@@ -7,7 +7,7 @@ using namespace micropather;
 
 class CombatGrid : public Graph
 {
-	class app * m_AppRef;
+	class app * m_App;
 	//MPVector<void*> m_Path;
 	float totalCost;
 	MicroPather * m_Pather;

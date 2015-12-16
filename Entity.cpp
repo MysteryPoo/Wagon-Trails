@@ -3,7 +3,7 @@
 
 Entity::Entity(app * App, unsigned entityIndex, int x, int y)
 {
-	m_AppRef = App;
+	m_App = App;
 	m_EntityIndex = entityIndex;
 	m_TimeToDie = false;
 }
