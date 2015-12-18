@@ -17,6 +17,7 @@ public:
 	bool EntityAt(int x, int y);
 	void RemoveEntity(unsigned index);
 	Entity * GetEntity(unsigned index);
+	unsigned FindNearest(Entity::Type type, unsigned origin);
 	void NewArcher(int x = 0, int y = 0);
 	void NewArrow(int x, int y, unsigned targetIndex);
 	void NewEntity(Entity * entity);

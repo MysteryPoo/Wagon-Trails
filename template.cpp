@@ -43,10 +43,13 @@ void app::Loop (void)
 	int newY = (int)((mouseY + 32) / 64);
 	if (newX >= 0 && newY >= 0 && agk::GetPointerPressed())
 	{
-		m_EntityManager->GetEntity(0)->Move(newX, newY);
-		m_EntityManager->NewArrow(m_EntityManager->GetEntity(0)->GetTransform()->getX(),
-			m_EntityManager->GetEntity(0)->GetTransform()->getY(),
-			1);
+		if (m_EntityManager->GetEntity(0) != nullptr)
+		{
+			m_EntityManager->GetEntity(0)->Move(newX, newY);
+			m_EntityManager->NewArrow(m_EntityManager->GetEntity(0)->GetTransform()->getX(),
+				m_EntityManager->GetEntity(0)->GetTransform()->getY(),
+				m_EntityManager->FindNearest(Entity::ARCHER, 0));
+		}
 	}
 
 	agk::Print( agk::ScreenFPS() );

@@ -9,6 +9,7 @@ Effect::Effect(app * App, unsigned entityIndex, float time, int x, int y) : Enti
 	agk::PlaySprite(m_SpriteIndex, 20);
 	m_TimeToDie = time + 0.5f;
 	m_Transform = new Transform((float)x * 64.0f, (float)y * 64.0f, { 64,64 }, 0.0f);
+	m_Type = Entity::OTHER;
 }
 
 void Effect::Update(float time, float delta)

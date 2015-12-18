@@ -13,6 +13,11 @@ Character::Character(class app * App, unsigned entityIndex, int x, int y) : Enti
 	m_Health = m_HealthMax = 10;
 }
 
+void Character::Damage(int damage)
+{
+	m_Health -= damage;
+}
+
 void Character::Update(float time, float delta)
 {
 	Entity::Update(time, delta);
@@ -51,6 +56,11 @@ void Character::Update(float time, float delta)
 	{
 		m_NextThought += (float)agk::Random(30, 80) / 10.0f;
 		this->Think();
+	}
+	// Check Health
+	if (m_Health < 0)
+	{
+		Entity::TimeToDie(true);
 	}
 }
 

@@ -13,6 +13,7 @@ public:
 	Character(class app * App, unsigned entityIndex, int x = 0, int y = 0);
 	virtual void Think() =0;
 	virtual void Attack() {};
+	virtual void Damage(int damage);
 	float GetHealth() { return (float)m_Health / (float)m_HealthMax; };
 	void Update(float time, float delta);
 	void Move(int x, int y);

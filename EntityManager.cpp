@@ -25,7 +25,9 @@ bool EntityManager::EntityAt(int x, int y)
 {
 	for (auto s = m_Entities->begin(); s != m_Entities->end(); ++s)
 	{
-		if (s->second->GetTransform()->getX() == x && s->second->GetTransform()->getY() == y)
+		if (s->second->GetType() != Entity::ARROW &&
+			s->second->GetTransform()->getX() == x &&
+			s->second->GetTransform()->getY() == y)
 		{
 			return true;
 		}
@@ -47,6 +49,29 @@ Entity * EntityManager::GetEntity(unsigned index)
 		return entity;
 	}
 	return nullptr;
+}
+
+unsigned EntityManager::FindNearest(Entity::Type type, unsigned origin)
+{
+	float distance = 500.0f;
+	auto nearest = m_Entities->begin();
+	int x = GetEntity(origin)->GetTransform()->getX();
+	int y = GetEntity(origin)->GetTransform()->getY();
+	for (auto e = nearest; e != m_Entities->end(); ++e)
+	{
+		if (e->first != origin && e->second->GetType() == type)
+		{
+			int dx = e->second->GetTransform()->getX() - x;
+			int dy = e->second->GetTransform()->getY() - y;
+			float dist = agk::Sqrt((float)dx*(float)dx + (float)dy*(float)dy);
+			if (dist < distance)
+			{
+				distance = dist;
+				nearest = e;
+			}
+		}
+	}
+	return nearest->first;
 }
 
 void EntityManager::NewArcher(int x, int y)

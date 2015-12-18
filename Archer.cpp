@@ -6,6 +6,7 @@ Archer::Archer(app * App, unsigned entityIndex, int x, int y) : Character(App, e
 {
 	// No special instructions for the Archer ctr. Simply calls Character ctr.
 	agk::SetSpriteFrame(m_SpriteIndex, 1);
+	m_Type = Entity::ARCHER;
 }
 
 void Archer::Think()
@@ -30,7 +31,7 @@ void Archer::Think()
 		Character::Move(newX, newY);
 		m_App->GetEntityManager()->NewArrow(m_Transform->getX(),
 			m_Transform->getY(),
-			m_EntityIndex == 0 ? 1 : 0);
+			m_App->GetEntityManager()->FindNearest(Entity::ARCHER, m_EntityIndex));
 	}
 	
 }
