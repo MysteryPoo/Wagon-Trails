@@ -18,7 +18,7 @@ CombatGrid::CombatGrid(app * App, int Width, int Height)
 		for (int y = 0; y < Height; ++y)
 		{
 			int rand = agk::Random(0, 100);
-			if (rand > 70 || x == 0 || x == m_Width - 1 || y == 0 || y == m_Height - 1)
+			if (rand > 80 || x == 0 || x == m_Width - 1 || y == 0 || y == m_Height - 1)
 			{
 				m_Grid[y*Width + x] = CombatGrid::OBSTACLE;
 				int Sprite = agk::CreateSprite(id->getImage("Media\\TerrainTiles.png"));

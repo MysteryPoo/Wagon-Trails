@@ -20,6 +20,7 @@ class app
 	ImageDatabase *id;
 	float lastFrame;
 	Camera2D *camera;
+	unsigned cameraTrack;
 	CombatGrid * grid;
 	EntityManager * m_EntityManager;
 	public:

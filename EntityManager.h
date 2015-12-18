@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <memory>
 #include "Entity.h"
+#include <string>
 
 using namespace std;
 
@@ -17,9 +18,12 @@ public:
 	bool EntityAt(int x, int y);
 	void RemoveEntity(unsigned index);
 	Entity * GetEntity(unsigned index);
-	unsigned FindNearest(Entity::Type type, unsigned origin);
+	unsigned FindNearest(Entity::Type type, unsigned origin, float * distanceResult = nullptr);
+	float GetDistance(unsigned origin, unsigned destination);
 	void NewArcher(int x = 0, int y = 0);
+	void NewCharacter(Entity::Type type, int x = 0, int y = 0);
 	void NewArrow(int x, int y, unsigned targetIndex);
+	void NewSpell(int x, int y, unsigned targetIndex);
 	void NewEntity(Entity * entity);
 	void NewHitEffect(int x, int y);
 	void Update(float time, float delta);

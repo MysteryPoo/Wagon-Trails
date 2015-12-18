@@ -2,8 +2,12 @@
 #include "agk.h"
 #include "template.h"
 #include "Archer.h"
+#include "Mage.h"
+#include "Brawler.h"
 #include "Arrow.h"
+#include "Spell.h"
 #include "Effect.h"
+#include <cstdarg>
 
 EntityManager::EntityManager(app * App)
 {
@@ -51,7 +55,7 @@ Entity * EntityManager::GetEntity(unsigned index)
 	return nullptr;
 }
 
-unsigned EntityManager::FindNearest(Entity::Type type, unsigned origin)
+unsigned EntityManager::FindNearest(Entity::Type type, unsigned origin, float * distanceResult)
 {
 	float distance = 500.0f;
 	auto nearest = m_Entities->begin();
@@ -71,7 +75,20 @@ unsigned EntityManager::FindNearest(Entity::Type type, unsigned origin)
 			}
 		}
 	}
+	if (distanceResult != nullptr)
+		*distanceResult = distance;
 	return nearest->first;
+}
+
+float EntityManager::GetDistance(unsigned origin, unsigned destination)
+{
+	Entity * ent1 = GetEntity(origin);
+	Entity * ent2 = GetEntity(destination);
+	if (ent1 == nullptr || ent2 == nullptr)
+		return 100.0f;
+	float dx = (float)(ent2->GetTransform()->getX() - ent1->GetTransform()->getX());
+	float dy = (float)(ent2->GetTransform()->getY() - ent1->GetTransform()->getY());
+	return agk::Sqrt(dx*dx + dy*dy);
 }
 
 void EntityManager::NewArcher(int x, int y)
@@ -89,11 +106,44 @@ void EntityManager::NewArcher(int x, int y)
 	m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Archer(m_App, m_EntityIndex, x, y)));
 }
 
+void EntityManager::NewCharacter(Entity::Type type, int x, int y)
+{
+	if (x == 0 && y == 0)
+	{
+		do
+		{
+			x = agk::Random(0, m_App->getCombatGrid()->GetWidth() - 1);
+			y = agk::Random(0, m_App->getCombatGrid()->GetHeight() - 1);
+		} while (!m_App->getCombatGrid()->Passable(x, y));
+	}
+	while (GetEntity(m_EntityIndex) != nullptr)
+		++m_EntityIndex;
+	switch (type)
+	{
+	case Entity::ARCHER:
+		m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Archer(m_App, m_EntityIndex, x, y)));
+		break;
+	case Entity::MAGE:
+		m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Mage(m_App, m_EntityIndex, x, y)));
+		break;
+	case Entity::BRAWLER:
+		m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Brawler(m_App, m_EntityIndex, x, y)));
+		break;
+	}
+}
+
 void EntityManager::NewArrow(int x, int y, unsigned targetIndex)
 {
 	while (GetEntity(m_EntityIndex) != nullptr)
 		++m_EntityIndex;
 	m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Arrow(m_App, m_EntityIndex, agk::Timer(), targetIndex, x, y)));
+}
+
+void EntityManager::NewSpell(int x, int y, unsigned targetIndex)
+{
+	while (GetEntity(m_EntityIndex) != nullptr)
+		++m_EntityIndex;
+	m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Spell(m_App, m_EntityIndex, agk::Timer(), targetIndex, x, y)));
 }
 
 void EntityManager::NewEntity(Entity * entity)

@@ -13,5 +13,5 @@ public:
 	Arrow(class app * App, unsigned entityIndex, float time, unsigned targetIndex, int x, int y);
 	~Arrow();
 	void Update(float time, float delta);
-	void Move(int x, int y);
+	bool Move(int x, int y);
 };

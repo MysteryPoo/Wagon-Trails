@@ -1,10 +1,10 @@
-#include "Arrow.h"
+#include "Spell.h"
 #include "template.h"
 #include "Character.h"
 
-Arrow::Arrow(app * App, unsigned entityIndex, float time, unsigned targetIndex, int x, int y) : Entity(App, entityIndex, x, y)
+Spell::Spell(app * App, unsigned entityIndex, float time, unsigned targetIndex, int x, int y) : Entity(App, entityIndex, x, y)
 {
-	m_SpriteIndex = agk::CreateSprite(m_App->getImageDatabase()->getImage("Media\\arrow_strip10.png"));
+	m_SpriteIndex = agk::CreateSprite(m_App->getImageDatabase()->getImage("Media\\spell.png"));
 	agk::SetSpriteAnimation(m_SpriteIndex, 32, 32, 10);
 	agk::SetSpriteOffset(m_SpriteIndex, 16, 16);
 	agk::PlaySprite(m_SpriteIndex, 20);
@@ -15,15 +15,15 @@ Arrow::Arrow(app * App, unsigned entityIndex, float time, unsigned targetIndex, 
 	m_Type = Entity::ARROW;
 }
 
-Arrow::~Arrow()
+Spell::~Spell()
 {
 	m_App->GetEntityManager()->NewHitEffect(m_Transform->getX(), m_Transform->getY());
 	Character * entity = (Character*)m_App->GetEntityManager()->GetEntity(m_TargetIndex);
-	if(entity != nullptr)
+	if (entity != nullptr)
 		entity->Damage(1);
 }
 
-void Arrow::Update(float time, float delta)
+void Spell::Update(float time, float delta)
 {
 	Entity::Update(time, delta);
 	Entity* entity = m_App->GetEntityManager()->GetEntity(m_TargetIndex);
@@ -44,7 +44,7 @@ void Arrow::Update(float time, float delta)
 		Entity::TimeToDie(true);
 }
 
-bool Arrow::Move(int x, int y)
+bool Spell::Move(int x, int y)
 {
 	agk::SetSpriteAngle(m_SpriteIndex, m_Transform->getDirection());
 	m_Transform->Move(x, y);

@@ -15,9 +15,11 @@ protected:
 public:
 	enum Type
 	{
-		ARCHER,
-		ARROW,
-		OTHER
+		ARROW = 1,
+		OTHER = 2,
+		ARCHER = 4,
+		MAGE = 8,
+		BRAWLER = 16
 	};
 	Entity(class app * App, unsigned entityIndex, int x = 0, int y = 0);
 	virtual ~Entity();
@@ -28,7 +30,7 @@ public:
 	void TimeToDie(bool timeToDie) { m_TimeToDie = timeToDie; };
 	bool TimeToDie() { return m_TimeToDie; };
 	virtual void Update(float timer, float delta);
-	virtual void Move(int x, int y) =0;
+	virtual bool Move(int x, int y) =0;
 	
 protected:
 	Type m_Type;

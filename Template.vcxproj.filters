@@ -26,6 +26,15 @@
     <ClCompile Include="Effect.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Mage.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Spell.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Brawler.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera2D.h" />
@@ -50,6 +59,15 @@
       <Filter>Entities\Header</Filter>
     </ClInclude>
     <ClInclude Include="EntityManager.h">
+      <Filter>Entities\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Mage.h">
+      <Filter>Entities\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Spell.h">
+      <Filter>Entities\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Brawler.h">
       <Filter>Entities\Header</Filter>
     </ClInclude>
   </ItemGroup>

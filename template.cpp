@@ -1,6 +1,7 @@
 // Includes
 #include "template.h"
 #include "Archer.h"
+#include "Mage.h"
 
 // Namespace
 using namespace AGK;
@@ -22,9 +23,17 @@ void app::Begin(void)
 
 	for (int s = 0; s < 12; ++s)
 	{
-		m_EntityManager->NewArcher();
+		int r = agk::Random(0, 100);
+		if (r > 90)
+			m_EntityManager->NewCharacter(Entity::ARCHER);
+		else if(r >50)
+			m_EntityManager->NewCharacter(Entity::MAGE);
+		else
+			m_EntityManager->NewCharacter(Entity::BRAWLER);
+		//m_EntityManager->NewArcher();
 	}
-	camera = new Camera2D(this, 0);
+	cameraTrack = 0;
+	camera = new Camera2D(this, cameraTrack);
 }
 
 void app::Loop (void)
@@ -33,6 +42,10 @@ void app::Loop (void)
 	float diff = thisFrame - lastFrame;
 	lastFrame = thisFrame;
 	m_EntityManager->Update(thisFrame, diff);
+	if (m_EntityManager->GetEntity(cameraTrack) == nullptr)
+	{
+		camera->Assign(++cameraTrack);
+	}
 	camera->Update();
 
 	float mouseX = agk::GetPointerX();
@@ -48,7 +61,7 @@ void app::Loop (void)
 			m_EntityManager->GetEntity(0)->Move(newX, newY);
 			m_EntityManager->NewArrow(m_EntityManager->GetEntity(0)->GetTransform()->getX(),
 				m_EntityManager->GetEntity(0)->GetTransform()->getY(),
-				m_EntityManager->FindNearest(Entity::ARCHER, 0));
+				m_EntityManager->FindNearest(Entity::MAGE, 0));
 		}
 	}
 

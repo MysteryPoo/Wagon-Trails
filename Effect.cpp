@@ -19,6 +19,7 @@ void Effect::Update(float time, float delta)
 		Entity::TimeToDie(true);
 }
 
-void Effect::Move(int x, int y)
+bool Effect::Move(int x, int y)
 {
+	return true;
 }

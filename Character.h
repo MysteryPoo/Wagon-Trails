@@ -16,5 +16,5 @@ public:
 	virtual void Damage(int damage);
 	float GetHealth() { return (float)m_Health / (float)m_HealthMax; };
 	void Update(float time, float delta);
-	void Move(int x, int y);
+	bool Move(int x, int y);
 };

@@ -64,7 +64,7 @@ void Character::Update(float time, float delta)
 	}
 }
 
-void Character::Move(int x, int y)
+bool Character::Move(int x, int y)
 {
 	if (m_App->getCombatGrid()->Passable(x, y))
 	{
@@ -76,5 +76,7 @@ void Character::Move(int x, int y)
 		void * end = m_App->getCombatGrid()->XYToNode(x, y);
 		int result = m_App->getCombatGrid()->GetPather()->Solve(start, end, &m_Path, &totalCost);
 		m_NodeIndex = 1;
+		return true;
 	}
+	return false;
 }
