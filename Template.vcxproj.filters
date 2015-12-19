@@ -35,6 +35,9 @@
     <ClCompile Include="Brawler.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Wagon.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera2D.h" />
@@ -68,6 +71,9 @@
       <Filter>Entities\Header</Filter>
     </ClInclude>
     <ClInclude Include="Brawler.h">
+      <Filter>Entities\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Wagon.h">
       <Filter>Entities\Header</Filter>
     </ClInclude>
   </ItemGroup>

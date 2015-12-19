@@ -127,6 +127,7 @@
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="template.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Wagon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archer.h" />
@@ -144,6 +145,7 @@
     <ClInclude Include="Spell.h" />
     <ClInclude Include="template.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="Wagon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

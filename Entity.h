@@ -15,11 +15,12 @@ protected:
 public:
 	enum Type
 	{
-		ARROW = 1,
-		OTHER = 2,
-		ARCHER = 4,
-		MAGE = 8,
-		BRAWLER = 16
+		WAGON,
+		ARROW,
+		OTHER,
+		ARCHER,
+		MAGE,
+		BRAWLER
 	};
 	Entity(class app * App, unsigned entityIndex, int x = 0, int y = 0);
 	virtual ~Entity();

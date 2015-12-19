@@ -4,7 +4,6 @@
 
 Archer::Archer(app * App, unsigned entityIndex, int x, int y) : Character(App, entityIndex, x, y)
 {
-	// No special instructions for the Archer ctr. Simply calls Character ctr.
 	agk::SetSpriteFrame(m_SpriteIndex, 1);
 	m_Type = Entity::ARCHER;
 }

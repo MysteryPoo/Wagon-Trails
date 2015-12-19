@@ -10,6 +10,7 @@ Character::Character(class app * App, unsigned entityIndex, int x, int y) : Enti
 	agk::SetSpriteOffset(m_SpriteIndex, agk::GetSpriteWidth(m_SpriteIndex) * 0.5f, agk::GetSpriteHeight(m_SpriteIndex) * 0.5f);
 	m_Transform = new Transform((float)x * 64.0f, (float)y * 64.0f);
 	m_NextThought = 0.0f;
+	m_NextAttack = 0.0f;
 	m_Health = m_HealthMax = 10;
 }
 
@@ -57,6 +58,11 @@ void Character::Update(float time, float delta)
 		m_NextThought += (float)agk::Random(30, 80) / 10.0f;
 		this->Think();
 	}
+	// Attack
+	if (time > m_NextAttack)
+	{
+		this->Attack();
+	}
 	// Check Health
 	if (m_Health < 0)
 	{
@@ -68,9 +74,6 @@ bool Character::Move(int x, int y)
 {
 	if (m_App->getCombatGrid()->Passable(x, y))
 	{
-		// Issue: This destroys the pathing cache, however, the cache becomes
-		// corrupted because entities move and they cause collisions.
-		m_App->getCombatGrid()->GetPather()->Reset();
 		float totalCost;
 		void * start = m_App->getCombatGrid()->XYToNode(m_Transform->getX(), m_Transform->getY());
 		void * end = m_App->getCombatGrid()->XYToNode(x, y);

@@ -1,6 +1,7 @@
 #include "EntityManager.h"
 #include "agk.h"
 #include "template.h"
+#include "Wagon.h"
 #include "Archer.h"
 #include "Mage.h"
 #include "Brawler.h"
@@ -120,6 +121,9 @@ void EntityManager::NewCharacter(Entity::Type type, int x, int y)
 		++m_EntityIndex;
 	switch (type)
 	{
+	case Entity::WAGON:
+		m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Wagon(m_App, m_EntityIndex, x, y)));
+		break;
 	case Entity::ARCHER:
 		m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Archer(m_App, m_EntityIndex, x, y)));
 		break;

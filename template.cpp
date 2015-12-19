@@ -1,7 +1,5 @@
 // Includes
 #include "template.h"
-#include "Archer.h"
-#include "Mage.h"
 
 // Namespace
 using namespace AGK;
@@ -17,16 +15,17 @@ void app::Begin(void)
 	agk::SetScissor(0, 0, 0, 0);
 
 	id = new ImageDatabase();
-	grid = new CombatGrid(this);
+	grid = new CombatGrid(this, 100, 100);
 	m_EntityManager = new EntityManager(this);
 	lastFrame = agk::Timer();
 
-	for (int s = 0; s < 12; ++s)
+	m_EntityManager->NewCharacter(Entity::WAGON);
+	for (int s = 0; s < 50; ++s)
 	{
 		int r = agk::Random(0, 100);
 		if (r > 90)
 			m_EntityManager->NewCharacter(Entity::ARCHER);
-		else if(r >50)
+		else if(r >20)
 			m_EntityManager->NewCharacter(Entity::MAGE);
 		else
 			m_EntityManager->NewCharacter(Entity::BRAWLER);
@@ -42,7 +41,7 @@ void app::Loop (void)
 	float diff = thisFrame - lastFrame;
 	lastFrame = thisFrame;
 	m_EntityManager->Update(thisFrame, diff);
-	if (m_EntityManager->GetEntity(cameraTrack) == nullptr)
+	if (m_EntityManager->GetEntity(cameraTrack) == nullptr || agk::GetButtonPressed(1))
 	{
 		camera->Assign(++cameraTrack);
 	}
@@ -59,9 +58,9 @@ void app::Loop (void)
 		if (m_EntityManager->GetEntity(0) != nullptr)
 		{
 			m_EntityManager->GetEntity(0)->Move(newX, newY);
-			m_EntityManager->NewArrow(m_EntityManager->GetEntity(0)->GetTransform()->getX(),
+			/*m_EntityManager->NewArrow(m_EntityManager->GetEntity(0)->GetTransform()->getX(),
 				m_EntityManager->GetEntity(0)->GetTransform()->getY(),
-				m_EntityManager->FindNearest(Entity::MAGE, 0));
+				m_EntityManager->FindNearest(Entity::MAGE, 0));*/
 		}
 	}
 

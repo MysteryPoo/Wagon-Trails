@@ -6,7 +6,9 @@ class Character : public Entity
 {
 	MPVector<void*> m_Path;
 	unsigned m_NodeIndex;
+protected:
 	float m_NextThought;
+	float m_NextAttack;
 	int m_HealthMax;
 	int m_Health;
 public:
@@ -15,6 +17,6 @@ public:
 	virtual void Attack() {};
 	virtual void Damage(int damage);
 	float GetHealth() { return (float)m_Health / (float)m_HealthMax; };
-	void Update(float time, float delta);
+	virtual void Update(float time, float delta);
 	bool Move(int x, int y);
 };

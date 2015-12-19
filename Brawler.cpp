@@ -4,14 +4,12 @@
 
 Brawler::Brawler(app * App, unsigned entityIndex, int x, int y) : Character(App, entityIndex, x, y)
 {
-	// No special instructions for the Archer ctr. Simply calls Character ctr.
 	agk::SetSpriteFrame(m_SpriteIndex, 4);
 	m_Type = Entity::BRAWLER;
 }
 
 void Brawler::Think()
 {
-	app * AppRef = Entity::GetAppRef();
 	if (Character::GetHealth() < 0.3)
 	{
 		// Retreat
@@ -59,62 +57,62 @@ void Brawler::Think()
 		// One of the targets is valid otherwise there is no tactical maneuver. Move as "Idle"
 		if (validTarget)
 		{
-			// Within Range of Best Target
+			// Attack Best Target, if able
 			if (m_App->GetEntityManager()->GetDistance(m_EntityIndex, bestTarget) <= 1.5f)
 			{
-				// Attack Best Target
-				m_App->GetEntityManager()->NewArrow(m_Transform->getX(),
+				// Damage target
+				Character * target = (Character*)m_App->GetEntityManager()->GetEntity(bestTarget);
+				target->Damage(1);
+				m_App->GetEntityManager()->NewHitEffect(target->GetTransform()->getX(), target->GetTransform()->getY());
+				/*m_App->GetEntityManager()->NewSpell(m_Transform->getX(),
 					m_Transform->getY(),
-					bestTarget);
+					bestTarget);*/
 				// Move toward advantageous position
 
-				// Keep at distance
-				// Move toward Best Target
-				float dx = m_App->GetEntityManager()->GetEntity(bestTarget)->GetTransform()->getX() - m_Transform->getX();
-				float dy = m_App->GetEntityManager()->GetEntity(bestTarget)->GetTransform()->getY() - m_Transform->getY();
-				float theta = agk::ATan2(dy, dx);
-				int newX = m_Transform->getX() + 1 * agk::Cos(theta);
-				int newY = m_Transform->getY() + 1 * agk::Sin(theta);
-				bool validMove = false;
-				while (!validMove)
-				{
-					validMove = Character::Move(newX--, newY--);
-				}
 			}
 			else // Not within Range of Best Target
 			{
+				// Attack Nearest Target, if able
 				if (m_App->GetEntityManager()->GetDistance(m_EntityIndex, nearestTarget) <= 1.5f)
-					// Attack Nearest Target, if able
-					m_App->GetEntityManager()->NewSpell(m_Transform->getX(),
+				{
+					// Damage target
+					Character * target = (Character*)m_App->GetEntityManager()->GetEntity(bestTarget);
+					target->Damage(1);
+					m_App->GetEntityManager()->NewHitEffect(target->GetTransform()->getX(), target->GetTransform()->getY());
+				}
+					/*m_App->GetEntityManager()->NewSpell(m_Transform->getX(),
 						m_Transform->getY(),
-						nearestTarget);
-				// Move toward Best Target
-				float dx = m_App->GetEntityManager()->GetEntity(bestTarget)->GetTransform()->getX() - m_Transform->getX();
-				float dy = m_App->GetEntityManager()->GetEntity(bestTarget)->GetTransform()->getY() - m_Transform->getY();
-				float theta = agk::ATan2(dy, dx);
+						nearestTarget);*/
+			}
+			// Move toward Best Target
+			float dx = m_App->GetEntityManager()->GetEntity(bestTarget)->GetTransform()->getX() - m_Transform->getX();
+			float dy = m_App->GetEntityManager()->GetEntity(bestTarget)->GetTransform()->getY() - m_Transform->getY();
+			float theta = agk::ATan2(dy, dx);
+			bool validMove = false;
+			while (!validMove)
+			{
 				int newX = m_Transform->getX() + 1 * agk::Cos(theta);
 				int newY = m_Transform->getY() + 1 * agk::Sin(theta);
-				bool validMove = false;
-				while (!validMove)
-				{
-					validMove = Character::Move(newX--, newY--);
-				}
+				validMove = Character::Move(newX, newY);
+				theta += 45.0f;
 			}
 		}
-
-		// Otherwise, move randomly
+		else // Move around aimlessly
+		{
+			int width = m_App->getCombatGrid()->GetWidth() - 1;
+			int height = m_App->getCombatGrid()->GetHeight() - 1;
+			int curX = this->GetTransform()->getX();
+			int curY = this->GetTransform()->getY();
+			int newX = agk::Random(curX - 5, curX + 5);
+			newX = newX < 0 ? 0 : newX;
+			newX = newX > width ? width : newX;
+			int newY = agk::Random(curY - 5, curY + 5);
+			newY = newY < 0 ? 0 : newY;
+			newY = newY > width ? width : newY;
+			Character::Move(newX, newY);
+		}
 		/*
-		int width = AppRef->getCombatGrid()->GetWidth() - 1;
-		int height = AppRef->getCombatGrid()->GetHeight() - 1;
-		int curX = this->GetTransform()->getX();
-		int curY = this->GetTransform()->getY();
-		int newX = agk::Random(curX - 5, curX + 5);
-		newX = newX < 0 ? 0 : newX;
-		newX = newX > width ? width : newX;
-		int newY = agk::Random(curY - 5, curY + 5);
-		newY = newY < 0 ? 0 : newY;
-		newY = newY > width ? width : newY;
-		Character::Move(newX, newY);
+
 		m_App->GetEntityManager()->NewArrow(m_Transform->getX(),
 		m_Transform->getY(),
 		m_App->GetEntityManager()->FindNearest(Entity::ARCHER, m_EntityIndex));*/
