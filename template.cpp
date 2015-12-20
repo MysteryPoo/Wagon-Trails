@@ -15,17 +15,17 @@ void app::Begin(void)
 	agk::SetScissor(0, 0, 0, 0);
 
 	id = new ImageDatabase();
-	grid = new CombatGrid(this, 100, 100);
+	grid = new CombatGrid(this, 50, 50);
 	m_EntityManager = new EntityManager(this);
 	lastFrame = agk::Timer();
 
 	m_EntityManager->NewCharacter(Entity::WAGON);
-	for (int s = 0; s < 50; ++s)
+	for (int s = 0; s < 100; ++s)
 	{
 		int r = agk::Random(0, 100);
 		if (r > 90)
 			m_EntityManager->NewCharacter(Entity::ARCHER);
-		else if(r >20)
+		else if(r >40)
 			m_EntityManager->NewCharacter(Entity::MAGE);
 		else
 			m_EntityManager->NewCharacter(Entity::BRAWLER);

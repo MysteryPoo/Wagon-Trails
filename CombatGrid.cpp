@@ -32,7 +32,10 @@ CombatGrid::CombatGrid(app * App, int Width, int Height)
 				Sprite = agk::CreateSprite(id->getImage("Media\\TerrainTiles2.png"));
 				agk::SetSpriteSnap(Sprite, 1);
 				agk::SetSpriteAnimation(Sprite, 64, 64, 64);
-				agk::SetSpriteFrame(Sprite, agk::Random(0, 100) > 50 ? 32 : 40);
+				if (x == 0 || x == m_Width - 1 || y == 0 || y == m_Height - 1)
+					agk::SetSpriteFrame(Sprite, 47);
+				else
+					agk::SetSpriteFrame(Sprite, agk::Random(0, 100) > 50 ? 32 : 40);
 				agk::SetSpriteOffset(Sprite, agk::GetSpriteWidth(Sprite) * 0.5f, agk::GetSpriteHeight(Sprite) * 0.5f);
 				agk::SetSpritePositionByOffset(Sprite, (float)x * 64, (float)y * 64);
 				agk::SetSpriteDepth(Sprite, 50);
