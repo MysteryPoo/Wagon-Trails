@@ -64,8 +64,8 @@ void Brawler::Think()
 			bool validMove = false;
 			while (!validMove)
 			{
-				int newX = m_Transform->getX() + 1 * agk::Cos(theta);
-				int newY = m_Transform->getY() + 1 * agk::Sin(theta);
+				int newX = m_Transform->getX() + 1.41f * agk::Cos(theta);
+				int newY = m_Transform->getY() + 1.41f * agk::Sin(theta);
 				validMove = Character::Move(newX, newY);
 				theta += 45.0f;
 			}

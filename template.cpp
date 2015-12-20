@@ -23,13 +23,12 @@ void app::Begin(void)
 	for (int s = 0; s < 100; ++s)
 	{
 		int r = agk::Random(0, 100);
-		if (r > 90)
+		if (r > 67)
 			m_EntityManager->NewCharacter(Entity::ARCHER);
-		else if(r >40)
+		else if(r >33)
 			m_EntityManager->NewCharacter(Entity::MAGE);
 		else
 			m_EntityManager->NewCharacter(Entity::BRAWLER);
-		//m_EntityManager->NewArcher();
 	}
 	cameraTrack = 0;
 	camera = new Camera2D(this, cameraTrack);
@@ -55,9 +54,9 @@ void app::Loop (void)
 	int newY = (int)((mouseY + 32) / 64);
 	if (newX >= 0 && newY >= 0 && agk::GetPointerPressed())
 	{
-		if (m_EntityManager->GetEntity(0) != nullptr)
+		if (m_EntityManager->GetEntity(cameraTrack) != nullptr)
 		{
-			m_EntityManager->GetEntity(0)->Move(newX, newY);
+			m_EntityManager->GetEntity(cameraTrack)->Move(newX, newY);
 			/*m_EntityManager->NewArrow(m_EntityManager->GetEntity(0)->GetTransform()->getX(),
 				m_EntityManager->GetEntity(0)->GetTransform()->getY(),
 				m_EntityManager->FindNearest(Entity::MAGE, 0));*/
