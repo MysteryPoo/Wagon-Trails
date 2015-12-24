@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Character.h"
+#include "Hireling.h"
 
-class Mage : public Character
+class Mage : public Hireling
 {
 public:
 	Mage(class app * App, unsigned entityIndex, int x, int y);

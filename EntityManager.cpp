@@ -56,6 +56,12 @@ Entity * EntityManager::GetEntity(unsigned index)
 	return nullptr;
 }
 
+bool EntityManager::GetEntity(Entity * entity)
+{
+
+	return false;
+}
+
 unsigned EntityManager::FindNearest(Entity::Type type, unsigned origin, float * distanceResult)
 {
 	float distance = 500.0f;
@@ -79,6 +85,62 @@ unsigned EntityManager::FindNearest(Entity::Type type, unsigned origin, float * 
 	if (distanceResult != nullptr)
 		*distanceResult = distance;
 	return nearest->first;
+}
+
+Entity * EntityManager::GetNearest(Entity::Type preferredType, Entity * origin, float range, Entity ** bestTarget)
+{
+	// Cache the x & y of the origin Entity
+	int ox = origin->GetTransform()->getX();
+	int oy = origin->GetTransform()->getY();
+	// range is the distance to beat
+	float bestDistance = range, nearestDistance = range;
+	// We'll return nullptr if we can't find anything
+	Entity * nearest = nullptr;
+	// Iterate through all our entities
+	for (auto e = m_Entities->begin(); e != m_Entities->end(); ++e)
+	{
+		// If we're checking our origin object, we need to skip it
+		if (e->second != origin)
+		{
+			// Calculate the x distance
+			int dx = e->second->GetTransform()->getX() - ox;
+			int dy;
+			// Slight optimization here to avoid unnecessary sqrt calls
+			// Both x and y deltas must beat the range independently if the true distance also beats the range
+			if (dx <= range)
+				// Calculate the y distance
+				dy = e->second->GetTransform()->getY() - oy;
+			else
+				// If delta x is bigger than the range, we'll skip to the next entity
+				continue;
+			// Cache the type of entity this is
+			Entity::Type type = e->second->GetType();
+			// If our x and y deltas are good and we're a Hireling (valid entity), let's continue to calculate true distance
+			if (dy <= range && (
+				type == Entity::ARCHER ||
+				type == Entity::BRAWLER ||
+				type == Entity::MAGE))
+			{
+				// Basic distance formula
+				float distance = agk::Sqrt(dx*dx + dy*dy);
+				// If this distance beats our nearest distance
+				if (distance < nearestDistance)
+				{
+					// This becomes the closest entity
+					nearest = e->second;
+					nearestDistance = distance;
+				}
+				// If we're checking for best target and this entity is what we're looking for...
+				if (bestTarget != nullptr && type == preferredType && distance < bestDistance)
+				{
+					// ...this becomes the best entity
+					bestTarget = &e->second;
+					bestDistance = distance;
+				}
+			}
+		}
+	}
+	return nearest;
 }
 
 float EntityManager::GetDistance(unsigned origin, unsigned destination)

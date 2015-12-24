@@ -1,6 +1,6 @@
 #include "Spell.h"
 #include "template.h"
-#include "Character.h"
+#include "Hireling.h"
 
 Spell::Spell(app * App, unsigned entityIndex, float time, unsigned targetIndex, int x, int y) : Entity(App, entityIndex, x, y)
 {
@@ -18,7 +18,7 @@ Spell::Spell(app * App, unsigned entityIndex, float time, unsigned targetIndex, 
 Spell::~Spell()
 {
 	m_App->GetEntityManager()->NewHitEffect(m_Transform->getX(), m_Transform->getY());
-	Character * entity = (Character*)m_App->GetEntityManager()->GetEntity(m_TargetIndex);
+	Hireling * entity = (Hireling*)m_App->GetEntityManager()->GetEntity(m_TargetIndex);
 	if (entity != nullptr)
 		entity->Damage(1);
 }

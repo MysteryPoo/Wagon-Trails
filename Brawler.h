@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Character.h"
+#include "Hireling.h"
 
-class Brawler : public Character
+class Brawler : public Hireling
 {
 public:
 	Brawler(class app * App, unsigned entityIndex, int x, int y);

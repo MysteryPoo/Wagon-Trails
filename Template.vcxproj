@@ -115,7 +115,7 @@
     <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="Brawler.cpp" />
     <ClCompile Include="Camera2D.cpp" />
-    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Hireling.cpp" />
     <ClCompile Include="CombatGrid.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Effect.cpp" />
@@ -134,7 +134,7 @@
     <ClInclude Include="Arrow.h" />
     <ClInclude Include="Brawler.h" />
     <ClInclude Include="Camera2D.h" />
-    <ClInclude Include="Character.h" />
+    <ClInclude Include="Hireling.h" />
     <ClInclude Include="CombatGrid.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Entity.h" />

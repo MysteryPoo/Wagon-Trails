@@ -2,7 +2,7 @@
 #include "template.h"
 #include "agk.h"
 
-Mage::Mage(app * App, unsigned entityIndex, int x, int y) : Character(App, entityIndex, x, y)
+Mage::Mage(app * App, unsigned entityIndex, int x, int y) : Hireling(App, entityIndex, x, y)
 {
 	agk::SetSpriteFrame(m_SpriteIndex, 5);
 	m_Type = Entity::MAGE;
@@ -10,7 +10,7 @@ Mage::Mage(app * App, unsigned entityIndex, int x, int y) : Character(App, entit
 
 void Mage::Think()
 {
-	if (Character::GetHealth() < 0.3)
+	if (Hireling::GetHealth() < 0.3)
 	{
 		// Retreat
 	}
@@ -66,7 +66,7 @@ void Mage::Think()
 			{
 				int newX = m_Transform->getX() + 5 * agk::Cos(theta);
 				int newY = m_Transform->getY() + 5 * agk::Sin(theta);
-				validMove = Character::Move(newX, newY);
+				validMove = Hireling::Move(newX, newY);
 				theta += 45.0f;
 			}
 		}
@@ -82,7 +82,7 @@ void Mage::Think()
 			int newY = agk::Random(curY - 5, curY + 5);
 			newY = newY < 0 ? 0 : newY;
 			newY = newY > width ? width : newY;
-			Character::Move(newX, newY);
+			Hireling::Move(newX, newY);
 		}
 		/*
 		
@@ -156,5 +156,5 @@ void Mage::Attack()
 
 void Mage::Update(float time, float delta)
 {
-	Character::Update(time, delta);
+	Hireling::Update(time, delta);
 }

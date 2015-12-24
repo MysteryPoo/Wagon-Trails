@@ -18,7 +18,9 @@ public:
 	bool EntityAt(int x, int y);
 	void RemoveEntity(unsigned index);
 	Entity * GetEntity(unsigned index);
+	bool GetEntity(Entity * entity);
 	unsigned FindNearest(Entity::Type type, unsigned origin, float * distanceResult = nullptr);
+	Entity * GetNearest(Entity::Type preferredType, Entity * origin, float range = 500.0f, Entity ** bestTarget = nullptr);
 	float GetDistance(unsigned origin, unsigned destination);
 	void NewArcher(int x = 0, int y = 0);
 	void NewCharacter(Entity::Type type, int x = 0, int y = 0);

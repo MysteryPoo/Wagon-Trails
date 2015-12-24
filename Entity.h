@@ -28,6 +28,7 @@ public:
 	Transform* GetTransform() { return m_Transform; };
 	int GetSprite() { return m_SpriteIndex; };
 	Type GetType() { return m_Type; };
+	unsigned GetIndex() { return m_EntityIndex; };
 	void TimeToDie(bool timeToDie) { m_TimeToDie = timeToDie; };
 	bool TimeToDie() { return m_TimeToDie; };
 	virtual void Update(float timer, float delta);

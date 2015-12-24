@@ -23,7 +23,7 @@ void app::Begin(void)
 	for (int s = 0; s < 100; ++s)
 	{
 		int r = agk::Random(0, 100);
-		if (r > 67)
+		if (r > 50)
 			m_EntityManager->NewCharacter(Entity::ARCHER);
 		else if(r >33)
 			m_EntityManager->NewCharacter(Entity::MAGE);

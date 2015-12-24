@@ -2,7 +2,7 @@
 #include "template.h"
 #include "agk.h"
 
-Brawler::Brawler(app * App, unsigned entityIndex, int x, int y) : Character(App, entityIndex, x, y)
+Brawler::Brawler(app * App, unsigned entityIndex, int x, int y) : Hireling(App, entityIndex, x, y)
 {
 	agk::SetSpriteFrame(m_SpriteIndex, 4);
 	m_Type = Entity::BRAWLER;
@@ -10,7 +10,7 @@ Brawler::Brawler(app * App, unsigned entityIndex, int x, int y) : Character(App,
 
 void Brawler::Think()
 {
-	if (Character::GetHealth() < 0.3)
+	if (Hireling::GetHealth() < 0.3)
 	{
 		// Retreat
 	}
@@ -66,7 +66,7 @@ void Brawler::Think()
 			{
 				int newX = m_Transform->getX() + 1.41f * agk::Cos(theta);
 				int newY = m_Transform->getY() + 1.41f * agk::Sin(theta);
-				validMove = Character::Move(newX, newY);
+				validMove = Hireling::Move(newX, newY);
 				theta += 45.0f;
 			}
 		}
@@ -82,7 +82,7 @@ void Brawler::Think()
 			int newY = agk::Random(curY - 5, curY + 5);
 			newY = newY < 0 ? 0 : newY;
 			newY = newY > width ? width : newY;
-			Character::Move(newX, newY);
+			Hireling::Move(newX, newY);
 		}
 	}
 
@@ -136,7 +136,7 @@ void Brawler::Attack()
 		{
 
 			// Damage target
-			Character * target = (Character*)m_App->GetEntityManager()->GetEntity(bestTarget);
+			Hireling * target = (Hireling*)m_App->GetEntityManager()->GetEntity(bestTarget);
 			target->Damage(1);
 			m_App->GetEntityManager()->NewHitEffect(target->GetTransform()->getX(), target->GetTransform()->getY());
 			m_NextAttack = agk::Timer() + 0.5f;
@@ -145,7 +145,7 @@ void Brawler::Attack()
 		{
 
 			// Damage target
-			Character * target = (Character*)m_App->GetEntityManager()->GetEntity(nearestTarget);
+			Hireling * target = (Hireling*)m_App->GetEntityManager()->GetEntity(nearestTarget);
 			target->Damage(1);
 			m_App->GetEntityManager()->NewHitEffect(target->GetTransform()->getX(), target->GetTransform()->getY());
 			m_NextAttack = agk::Timer() + 0.5f;

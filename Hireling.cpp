@@ -1,25 +1,25 @@
-#include "Character.h"
+#include "Hireling.h"
 #include "ImageDatabase.h"
 #include "template.h"
 
-Character::Character(class app * App, unsigned entityIndex, int x, int y) : Entity(App, entityIndex, x, y)
+Hireling::Hireling(class app * App, unsigned entityIndex, int x, int y) : Entity(App, entityIndex, x, y)
 {
 	ImageDatabase *id = m_App->getImageDatabase();
 	m_SpriteIndex = agk::CreateSprite(id->getImage("Media\\Humanoids1.png"));
 	agk::SetSpriteAnimation(m_SpriteIndex, 64, 64, 64);
 	agk::SetSpriteOffset(m_SpriteIndex, agk::GetSpriteWidth(m_SpriteIndex) * 0.5f, agk::GetSpriteHeight(m_SpriteIndex) * 0.5f);
 	m_Transform = new Transform((float)x * 64.0f, (float)y * 64.0f);
-	m_NextThought = 0.0f;
-	m_NextAttack = 0.0f;
+	m_NextThought = m_NextAttack = 0.0f;
 	m_Health = m_HealthMax = 10;
+	m_Best = m_Nearest = 0;
 }
 
-void Character::Damage(int damage)
+void Hireling::Damage(int damage)
 {
 	m_Health -= damage;
 }
 
-void Character::Update(float time, float delta)
+void Hireling::Update(float time, float delta)
 {
 	Entity::Update(time, delta);
 	// Move to next node in path
@@ -70,7 +70,7 @@ void Character::Update(float time, float delta)
 	}
 }
 
-bool Character::Move(int x, int y)
+bool Hireling::Move(int x, int y)
 {
 	if (m_App->getCombatGrid()->Passable(x, y))
 	{

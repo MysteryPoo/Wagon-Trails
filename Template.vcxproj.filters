@@ -17,9 +17,6 @@
     <ClCompile Include="Arrow.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="EntityManager.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
@@ -38,6 +35,9 @@
     <ClCompile Include="Wagon.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Hireling.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera2D.h" />
@@ -50,9 +50,6 @@
       <Filter>Entities\Header</Filter>
     </ClInclude>
     <ClInclude Include="Arrow.h">
-      <Filter>Entities\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
       <Filter>Entities\Header</Filter>
     </ClInclude>
     <ClInclude Include="Effect.h">
@@ -74,6 +71,9 @@
       <Filter>Entities\Header</Filter>
     </ClInclude>
     <ClInclude Include="Wagon.h">
+      <Filter>Entities\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Hireling.h">
       <Filter>Entities\Header</Filter>
     </ClInclude>
   </ItemGroup>
