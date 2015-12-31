@@ -12,6 +12,7 @@ class Transform
 	void setSpeed(float speed);
 public:
 	Transform(float x = 0.0f, float y = 0.0f, SpriteSize spriteSize = { 64,64 }, float maxSpeed = 200.0f);
+	Transform(int x = 0, int y = 0, SpriteSize spriteSize = { 64,64 }, float maxSpeed = 200.0f);
 	void Move(int x, int y);
 	float getDirection() { return m_Direction; }
 	float getSpeed() { return m_Speed; }

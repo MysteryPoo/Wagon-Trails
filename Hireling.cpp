@@ -8,7 +8,6 @@ Hireling::Hireling(class app * App, unsigned entityIndex, int x, int y) : Entity
 	m_SpriteIndex = agk::CreateSprite(id->getImage("Media\\Humanoids1.png"));
 	agk::SetSpriteAnimation(m_SpriteIndex, 64, 64, 64);
 	agk::SetSpriteOffset(m_SpriteIndex, agk::GetSpriteWidth(m_SpriteIndex) * 0.5f, agk::GetSpriteHeight(m_SpriteIndex) * 0.5f);
-	m_Transform = new Transform((float)x * 64.0f, (float)y * 64.0f);
 	m_NextThought = m_NextAttack = 0.0f;
 	m_Health = m_HealthMax = 10;
 	m_Best = m_Nearest = 0;

@@ -6,6 +6,7 @@ Entity::Entity(app * App, unsigned entityIndex, int x, int y)
 	m_App = App;
 	m_EntityIndex = entityIndex;
 	m_TimeToDie = false;
+	m_Transform = new Transform(x, y);
 }
 
 Entity::~Entity()

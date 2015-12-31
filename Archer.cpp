@@ -10,7 +10,6 @@ Archer::Archer(app * App, unsigned entityIndex, int x, int y) : Hireling(App, en
 
 void Archer::Think()
 {
-	app * AppRef = Entity::GetAppRef();
 	if (Hireling::GetHealth() < 0.3)
 	{
 		// Retreat
@@ -18,9 +17,8 @@ void Archer::Think()
 	else
 	{
 		Entity * best = m_App->GetEntityManager()->GetEntity(m_Best);
-		Entity * nearest;
 		if(best == nullptr)
-			nearest = m_App->GetEntityManager()->GetNearest(Entity::MAGE, this, 14.0f, &best);
+			best = m_App->GetEntityManager()->GetNearest(Entity::MAGE, this, 32.0f);
 		if (best != nullptr)
 		{
 			// Cache our best target
@@ -60,11 +58,10 @@ void Archer::Think()
 
 void Archer::Attack()
 {
-	Entity * best = m_App->GetEntityManager()->GetEntity(m_Best);
-	Entity * nearest;
-	//if(best == nullptr)
-		nearest = m_App->GetEntityManager()->GetNearest(Entity::MAGE, this, 7.0f, &best);
-	if (best != nullptr)
+	Entity * nearest = m_App->GetEntityManager()->GetEntity(m_Nearest);
+	if(nearest == nullptr)
+		nearest = m_App->GetEntityManager()->GetNearest(Entity::MAGE, this, 7.0f);
+	/*if (best != nullptr)
 	{
 		// Cache our best target
 		m_Best = best->GetIndex();
@@ -73,8 +70,8 @@ void Archer::Attack()
 			m_Transform->getY(),
 			m_Best);
 		m_NextAttack = agk::Timer() + 3.0f;
-	}
-	else if (nearest != nullptr)
+	}*/
+	if (nearest != nullptr)
 	{
 		// Cache our nearest target
 		m_Nearest = nearest->GetIndex();

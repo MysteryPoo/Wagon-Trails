@@ -14,6 +14,19 @@ Transform::Transform(float x, float y, SpriteSize spriteSize, float maxSpeed)
 	this->m_SpriteSize.Height = spriteSize.Height;
 }
 
+Transform::Transform(int x, int y, SpriteSize spriteSize, float maxSpeed)
+{
+	this->m_SpriteX = x * spriteSize.Width;
+	this->m_SpriteY = y * spriteSize.Height;
+	this->m_Direction = 0;
+	this->m_Speed = 0;
+	this->m_MaxSpeed = maxSpeed;
+	this->m_GoalX = x;
+	this->m_GoalY = y;
+	this->m_SpriteSize.Width = spriteSize.Width;
+	this->m_SpriteSize.Height = spriteSize.Height;
+}
+
 void Transform::Move(int x, int y)
 {
 	m_GoalX = x;
