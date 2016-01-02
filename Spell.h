@@ -2,16 +2,10 @@
 
 #include "agk.h"
 #include "Transform.h"
-#include "Entity.h"
+#include "Attack.h"
 
-class Spell : public Entity
+class Spell : public Attack
 {
-	float m_TimeToDie;
-	unsigned m_TargetIndex;
-	bool m_Hit;
 public:
-	Spell(class app * App, unsigned entityIndex, float time, unsigned targetIndex, int x, int y);
-	~Spell();
-	void Update(float time, float delta);
-	bool Move(int x, int y);
+	Spell(class app * App, unsigned entityIndex, float timeToDie, unsigned sourceIndex, unsigned targetIndex, int x, int y);
 };

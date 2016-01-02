@@ -2,7 +2,7 @@
 #include "template.h"
 #include "agk.h"
 
-Brawler::Brawler(app * App, unsigned entityIndex, int x, int y) : Hireling(App, entityIndex, x, y)
+Brawler::Brawler(app * App, unsigned entityIndex, unsigned wagon, int x, int y) : Hireling(App, entityIndex, wagon, x, y)
 {
 	agk::SetSpriteFrame(m_SpriteIndex, 4);
 	m_Type = Entity::BRAWLER;

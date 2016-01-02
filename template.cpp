@@ -19,16 +19,16 @@ void app::Begin(void)
 	m_EntityManager = new EntityManager(this);
 	lastFrame = agk::Timer();
 
-	m_EntityManager->NewCharacter(Entity::WAGON);
+	unsigned npcWagon = m_EntityManager->NewCharacter(Entity::WAGON, 0);
 	for (int s = 0; s < 5; ++s)
 	{
 		int r = agk::Random(0, 100);
 		if (r > 50)
-			m_EntityManager->NewCharacter(Entity::ARCHER);
+			m_EntityManager->NewCharacter(Entity::ARCHER, npcWagon);
 		else if(r >33)
-			m_EntityManager->NewCharacter(Entity::MAGE);
+			m_EntityManager->NewCharacter(Entity::MAGE, npcWagon);
 		else
-			m_EntityManager->NewCharacter(Entity::BRAWLER);
+			m_EntityManager->NewCharacter(Entity::BRAWLER, npcWagon);
 	}
 	cameraTrack = 0;
 	camera = new Camera2D(this, cameraTrack);

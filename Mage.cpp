@@ -2,7 +2,7 @@
 #include "template.h"
 #include "agk.h"
 
-Mage::Mage(app * App, unsigned entityIndex, int x, int y) : Hireling(App, entityIndex, x, y)
+Mage::Mage(app * App, unsigned entityIndex, unsigned wagon, int x, int y) : Hireling(App, entityIndex, wagon, x, y)
 {
 	agk::SetSpriteFrame(m_SpriteIndex, 5);
 	m_Type = Entity::MAGE;
@@ -78,6 +78,7 @@ void Mage::Attack()
 
 		m_App->GetEntityManager()->NewSpell(m_Transform->getX(),
 			m_Transform->getY(),
+			m_EntityIndex,
 			m_Nearest);
 		m_NextAttack = agk::Timer() + 3.0f;
 	}

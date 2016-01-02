@@ -2,7 +2,7 @@
 #include "agk.h"
 #include "template.h"
 
-Wagon::Wagon(app * App, unsigned entityIndex, int x, int y) : Hireling(App, entityIndex, x, y)
+Wagon::Wagon(app * App, unsigned entityIndex, unsigned wagon, int x, int y) : Hireling(App, entityIndex, wagon, x, y)
 {
 	agk::SetSpriteImage(m_SpriteIndex, m_App->getImageDatabase()->getImage("Media\\wagon.png"));
 	agk::SetSpriteAnimation(m_SpriteIndex, 208, 192, 16);

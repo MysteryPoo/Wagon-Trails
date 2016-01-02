@@ -5,6 +5,12 @@
 class Wagon : public Hireling
 {
 public:
-	Wagon(class app * App, unsigned entityIndex, int x, int y);
+	enum Mode
+	{
+		PACKED,
+		ESCORT,
+		DEPLOYED
+	};
+	Wagon(class app * App, unsigned entityIndex, unsigned wagon, int x, int y);
 	void Think();
 };

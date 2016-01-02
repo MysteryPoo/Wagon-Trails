@@ -2,7 +2,7 @@
 #include "ImageDatabase.h"
 #include "template.h"
 
-Hireling::Hireling(class app * App, unsigned entityIndex, int x, int y) : Entity(App, entityIndex, x, y)
+Hireling::Hireling(class app * App, unsigned entityIndex, unsigned wagon, int x, int y) : Entity(App, entityIndex, x, y)
 {
 	ImageDatabase *id = m_App->getImageDatabase();
 	m_SpriteIndex = agk::CreateSprite(id->getImage("Media\\Humanoids1.png"));
@@ -11,6 +11,7 @@ Hireling::Hireling(class app * App, unsigned entityIndex, int x, int y) : Entity
 	m_NextThought = m_NextAttack = 0.0f;
 	m_Health = m_HealthMax = 10;
 	m_Best = m_Nearest = 0;
+	m_Wagon = wagon;
 }
 
 void Hireling::Damage(int damage)

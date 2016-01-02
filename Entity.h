@@ -16,7 +16,7 @@ public:
 	enum Type
 	{
 		WAGON,
-		ARROW,
+		ATTACK,
 		OTHER,
 		ARCHER,
 		MAGE,

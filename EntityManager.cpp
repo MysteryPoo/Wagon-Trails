@@ -30,7 +30,7 @@ bool EntityManager::EntityAt(int x, int y)
 {
 	for (auto s = m_Entities->begin(); s != m_Entities->end(); ++s)
 	{
-		if (s->second->GetType() != Entity::ARROW &&
+		if (s->second->GetType() != Entity::ATTACK &&
 			s->second->GetTransform()->getX() == x &&
 			s->second->GetTransform()->getY() == y)
 		{
@@ -154,22 +154,7 @@ float EntityManager::GetDistance(unsigned origin, unsigned destination)
 	return agk::Sqrt(dx*dx + dy*dy);
 }
 
-void EntityManager::NewArcher(int x, int y)
-{
-	if (x == 0 && y == 0)
-	{
-		do
-		{
-			x = agk::Random(0, m_App->getCombatGrid()->GetWidth() - 1);
-			y = agk::Random(0, m_App->getCombatGrid()->GetHeight() - 1);
-		} while (!m_App->getCombatGrid()->Passable(x, y));
-	}
-	while (GetEntity(m_EntityIndex) != nullptr)
-		++m_EntityIndex;
-	m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Archer(m_App, m_EntityIndex, x, y)));
-}
-
-void EntityManager::NewCharacter(Entity::Type type, int x, int y)
+unsigned EntityManager::NewCharacter(Entity::Type type, unsigned wagon, int x, int y)
 {
 	if (x == 0 && y == 0)
 	{
@@ -184,32 +169,33 @@ void EntityManager::NewCharacter(Entity::Type type, int x, int y)
 	switch (type)
 	{
 	case Entity::WAGON:
-		m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Wagon(m_App, m_EntityIndex, x, y)));
+		m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Wagon(m_App, m_EntityIndex, wagon, x, y)));
 		break;
 	case Entity::ARCHER:
-		m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Archer(m_App, m_EntityIndex, x, y)));
+		m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Archer(m_App, m_EntityIndex, wagon, x, y)));
 		break;
 	case Entity::MAGE:
-		m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Mage(m_App, m_EntityIndex, x, y)));
+		m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Mage(m_App, m_EntityIndex,wagon, x, y)));
 		break;
 	case Entity::BRAWLER:
-		m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Brawler(m_App, m_EntityIndex, x, y)));
+		m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Brawler(m_App, m_EntityIndex,wagon, x, y)));
 		break;
 	}
+	return (m_EntityIndex - 1);
 }
 
-void EntityManager::NewArrow(int x, int y, unsigned targetIndex)
+void EntityManager::NewArrow(int x, int y, unsigned sourceIndex, unsigned targetIndex)
 {
 	while (GetEntity(m_EntityIndex) != nullptr)
 		++m_EntityIndex;
-	m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Arrow(m_App, m_EntityIndex, agk::Timer(), targetIndex, x, y)));
+	m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Arrow(m_App, m_EntityIndex, agk::Timer(), sourceIndex, targetIndex, x, y)));
 }
 
-void EntityManager::NewSpell(int x, int y, unsigned targetIndex)
+void EntityManager::NewSpell(int x, int y, unsigned sourceIndex, unsigned targetIndex)
 {
 	while (GetEntity(m_EntityIndex) != nullptr)
 		++m_EntityIndex;
-	m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Spell(m_App, m_EntityIndex, agk::Timer(), targetIndex, x, y)));
+	m_Entities->insert(std::make_pair<unsigned, Entity*>(m_EntityIndex++, new Spell(m_App, m_EntityIndex, agk::Timer(), sourceIndex, targetIndex, x, y)));
 }
 
 void EntityManager::NewEntity(Entity * entity)

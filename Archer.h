@@ -5,7 +5,7 @@
 class Archer : public Hireling
 {
 public:
-	Archer(class app * App, unsigned entityIndex, int x, int y);
+	Archer(class app * App, unsigned entityIndex, unsigned wagon, int x, int y);
 	void Think();
 	void Attack();
 };
